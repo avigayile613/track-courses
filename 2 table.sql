@@ -18,7 +18,7 @@ CourseName varchar(100) not null
 CourseStartDate date not null,
 FinalGrade tinyint null 
 	constraint c_Final_Grade_must_be_between_0_and_100 check (FinalGrade between 0 and 100),
-constraint c_Enrollment_Date_must_be_before_Course_Start_Date check (EnrollmentDate < CourseStartDate),
+constraint c_Enrollment_Date_cannot_be_after_Course_Start_Date check (EnrollmentDate <= CourseStartDate),
 constraint u_StudentEmail_CourseName unique (StudentEmail, CourseName),
 constraint c_Final_Grade_must_be_present_when_Enrollment_Status_is_completed 
 	check ((EnrollmentStatus = 'completed' and FinalGrade is not null) or (EnrollmentStatus <> 'completed' and FinalGrade is null))
